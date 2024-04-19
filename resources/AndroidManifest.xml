@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="V1.6.0_20230725203430_Release" android:compileSdkVersion="28" android:compileSdkVersionCodename="9" coreApp="true" package="com.xiaopeng.data.uploader" platformBuildVersionCode="28" platformBuildVersionName="9">
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="28"/>
+    <permission android:name="com.xiaopeng.permission.DATA_SERVICE" android:protectionLevel="normal"/>
+    <uses-permission android:name="android.car.permission.CAR_VENDOR_EXTENSION"/>
+    <uses-permission android:name="android.car.permission.CONTROL_CAR_CLIMATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.xiaopeng.permission.DATA_SERVICE"/>
+    <uses-permission android:name="com.xiaopeng.permission.SYSTEM_DELEGATE"/>
+    <uses-permission android:name="com.xiaopeng.permission.SERVICE"/>
+    <uses-permission android:name="com.xiaopeng.permission.BROADCAST"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="xiaopeng.permission.DATA_SERVICE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="com.xiaopeng.permission.LOCATION_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <application android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:name="com.xiaopeng.data.uploader.App" android:persistent="true" android:debuggable="true" android:allowBackup="false" android:largeHeap="true" android:supportsRtl="true" android:extractNativeLibs="false" android:usesCleartextTraffic="true" android:appComponentFactory="android.support.v4.app.CoreComponentFactory">
+        <receiver android:name="com.xiaopeng.data.uploader.AppBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="com.xiaopeng.broadcast.ACTION_TOKEN_GOTTEN"/>
+                <action android:name="system.traffic.statistics.action"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.xiaopeng.data.uploader.system.DataService" android:permission="com.xiaopeng.permission.DATA_SERVICE">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.xiaopeng.service.DATA_SERVICE"/>
+            </intent-filter>
+        </service>
+        <service android:name="org.eclipse.paho.android.service.MqttService"/>
+        <meta-data android:name="AA_DB_NAME" android:value="DataUploadService.db"/>
+        <meta-data android:name="AA_DB_VERSION" android:value="2"/>
+        <meta-data android:name="AA_MODELS" android:value="com.xiaopeng.data.uploader.bean.GlobalObjectKeyBean,com.xiaopeng.data.uploader.bean.GlobalUploadParamBean"/>
+        <provider android:name="com.activeandroid.content.ContentProvider" android:enabled="true" android:exported="false" android:authorities="com.xiaopeng.data.uploader"/>
+        <provider android:name="com.xiaopeng.lib.framework.netchannelmodule.common.ContextNetStatusProvider" android:exported="false" android:authorities="com.xiaopeng.data.uploader.netmodule.provider"/>
+    </application>
+</manifest>

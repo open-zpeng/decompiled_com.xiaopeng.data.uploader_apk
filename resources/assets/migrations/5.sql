@@ -1,0 +1,1 @@
+ALTER TABLE t_can_data ADD COLUMN collect_time INTEGER;
